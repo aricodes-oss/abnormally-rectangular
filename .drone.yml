@@ -1,0 +1,36 @@
+kind: pipeline
+type: docker
+name: publish
+
+platform:
+  os: linux
+  arch: arm64
+
+trigger:
+  branch:
+    - main
+
+steps:
+  - name: submodules
+    image: alpine/git
+    commands:
+      - git submodule update --init --recursive
+
+  - name: build
+    image: alpine
+    commands:
+      - apk add hugo
+      - hugo
+
+  - name: publish
+    image: instrumentisto/rsync-ssh
+    commands:
+      - echo "$PRIVATE_KEY" >> id_rsa
+      - chmod 600 id_rsa
+      - cd public
+      - rsync -avz -e 'ssh -i ../id_rsa -o StrictHostKeyChecking=no' --progress ./* $DEST
+    environment:
+      PRIVATE_KEY:
+        from_secret: PRIVATE_KEY
+      DEST:
+        from_secret: RSYNC_DEST
