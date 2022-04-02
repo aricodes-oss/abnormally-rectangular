@@ -19,18 +19,19 @@ params:
   description:
   navbarlogo:
     # Logo (from static/images/logos/___)
-    image: logos/fresh.svg
+    image: logos/arc.svg
     link: /
   font:
     name: 'Open Sans'
     sizes: [400, 600]
   hero:
     # Main hero title
-    title: Manage. Deploy.
+    title: Abnormally Rectangular Cubes
     # Hero subtitle (optional)
-    subtitle: Lorem ipsum sit dolor amet is dummy text used by the typography industry
+    subtitle: High percision, custom hand made game controllers. Unleash your 
+      potential!
     # Button text
-    buttontext: Get started
+    buttontext: Browse Shop
     # Where the main hero button links to
     buttonlink: '#'
     # Hero image (from static/images/___)
